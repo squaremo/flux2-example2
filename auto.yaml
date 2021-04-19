@@ -1,0 +1,19 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1alpha1
+kind: ImageUpdateAutomation
+metadata:
+  name: flux-system
+  namespace: flux-system
+spec:
+  checkout:
+    branch: main
+    gitRepositoryRef:
+      name: flux-system
+  commit:
+    authorEmail: fluxbot@users.noreply.github.com
+    authorName: fluxbot
+    messageTemplate: |
+      Automated update
+      
+      {{range .Updated.Images}} - {{println .}}{{end}}
+  interval: 1m0s
